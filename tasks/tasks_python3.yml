@@ -9,9 +9,22 @@
 
   - name: Python3 | install dependencies
     apt: pkg="{{item}}" state="present"
-    register: py3_installed | failed
+    when: py3_installed | failed and ansible_distribution in ["Ubuntu"]
     with_items:
       - "make"
+      - "build-essential"
+    tags:
+      - python3
+
+  - name: Python3 | install dependencies
+    apt: pkg="{{item}}" state="present"
+    when: py3_installed | failed and ansible_distribution in ["Redhat", "CentOS"]
+    with_items:
+      - "gcc"
+      - "glibc"
+      - "glibc-common"
+      - "gd"
+      - "gd-devel"
     tags:
       - python3
 
