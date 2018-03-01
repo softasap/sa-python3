@@ -1,0 +1,75 @@
+---
+  - name: Python3 | Check is installed
+    shell: "python3 --version"
+    register: py3_installed
+    ignore_errors: true
+    failed_when: "'Python {{python_version}}' not in py3_installed.stdout"
+    tags:
+      - python3
+
+  - name: Python3 | install dependencies
+    apt: pkg="{{item}}" state="present"
+    when: py3_installed | failed and ansible_distribution in ["Ubuntu"]
+    with_items:
+      - "make"
+      - "build-essential"
+      - "libffi-dev"
+      - "zlib1g-dev"
+    tags:
+      - python3
+
+  - name: Python3 | install dependencies
+    apt: pkg="{{item}}" state="present"
+    when: py3_installed | failed and ansible_distribution in ["Redhat", "CentOS"]
+    with_items:
+      - "gcc"
+      - "glibc"
+      - "glibc-common"
+      - "gd"
+      - "gd-devel"
+      - "zlib-devel"
+    tags:
+      - python3
+
+  - name: Python3 | Download distribution
+    get_url:
+      url: "https://www.python.org/ftp/python/{{python_version}}/Python-{{python_version}}.tgz"
+      dest: /tmp/Python-{{python_version}}.tgz
+    when: py3_installed | failed
+    tags:
+      - python3
+
+  - name: Python3 | Unpack distribution
+    unarchive:
+      src: /tmp/Python-{{python_version}}.tgz
+      dest: /tmp
+      remote_src: yes
+    when: py3_installed | failed
+    tags:
+      - python3
+
+  - name: Python3 | Configure for install
+    shell: "./configure"
+    args:
+      chdir: "/tmp/Python-{{python_version}}"
+    when: py3_installed | failed
+    tags:
+      - python3
+
+  - name: Python3 | make
+    shell: "make"
+    args:
+      chdir: "/tmp/Python-{{python_version}}"
+    when: py3_installed | failed
+    become: yes
+    tags:
+      - python3
+
+  - name: Python3 | make install
+    shell: "make install"
+    args:
+      chdir: "/tmp/Python-{{python_version}}"
+    when: py3_installed | failed
+    become: yes
+    tags:
+      - python3
