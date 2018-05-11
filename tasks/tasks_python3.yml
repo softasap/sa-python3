@@ -9,7 +9,8 @@
 
   - name: Python3 | install dependencies
     apt: pkg="{{item}}" state="present"
-    when: py3_installed | failed and ansible_distribution in ["Ubuntu"]
+    when: py3_installed  is failed and ansible_distribution in ["Ubuntu"]
+    become: yes
     with_items:
       - "make"
       - "build-essential"
@@ -20,7 +21,8 @@
 
   - name: Python3 | install dependencies
     apt: pkg="{{item}}" state="present"
-    when: py3_installed | failed and ansible_distribution in ["Redhat", "CentOS"]
+    become: yes
+    when: py3_installed  is failed and ansible_distribution in ["Redhat", "CentOS"]
     with_items:
       - "gcc"
       - "glibc"
@@ -35,7 +37,7 @@
     get_url:
       url: "https://www.python.org/ftp/python/{{python_version}}/Python-{{python_version}}.tgz"
       dest: /tmp/Python-{{python_version}}.tgz
-    when: py3_installed | failed
+    when: py3_installed  is failed
     tags:
       - python3
 
@@ -44,7 +46,7 @@
       src: /tmp/Python-{{python_version}}.tgz
       dest: /tmp
       remote_src: yes
-    when: py3_installed | failed
+    when: py3_installed  is failed
     tags:
       - python3
 
@@ -52,7 +54,7 @@
     shell: "./configure"
     args:
       chdir: "/tmp/Python-{{python_version}}"
-    when: py3_installed | failed
+    when: py3_installed  is failed
     tags:
       - python3
 
@@ -60,7 +62,7 @@
     shell: "make"
     args:
       chdir: "/tmp/Python-{{python_version}}"
-    when: py3_installed | failed
+    when: py3_installed  is failed
     become: yes
     tags:
       - python3
@@ -69,7 +71,7 @@
     shell: "make install"
     args:
       chdir: "/tmp/Python-{{python_version}}"
-    when: py3_installed | failed
+    when: py3_installed  is failed
     become: yes
     tags:
       - python3
