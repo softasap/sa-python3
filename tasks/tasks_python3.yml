@@ -11,7 +11,7 @@
   - name: Python3 | install dependencies
     apt: pkg="{{ item }}" state="present"
     retries: 3
-    result: result
+    register: result
     until: result is not failed
     when: py3_installed  is failed and ansible_distribution in ["Ubuntu"]
     become: yes
@@ -34,7 +34,7 @@
   - name: Python3 | install dependencies
     apt: pkg="{{ item }}" state="present"
     retries: 3
-    result: result
+    register: result
     until: result is not failed
     become: yes
     when: py3_installed  is failed and ansible_distribution in ["Redhat", "CentOS"]
