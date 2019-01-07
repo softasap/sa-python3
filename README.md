@@ -3,7 +3,7 @@ sa-python3
 
 [![Build Status](https://travis-ci.org/softasap/sa-python3.svg?branch=master)](https://travis-ci.org/softasap/sa-python3)
 
-installs python3 and updates pip3 to the specified {{python_version}}
+installs python3 and updates pip3 to the specified {{ python_version }}
 
 Example of usage (all parameters are optional)
 

@@ -1,4 +1,4 @@
 ---
 # defaults file for sa-python3
 role_dir: "{{role_path}}"
-python_version: "3.6.4"
+python_version: "3.7.2"
