@@ -3,7 +3,6 @@
     command: "python3 --version"
     register: py3_installed
     ignore_errors: true
-    failed_when: "'Python {{ python_version }}' not in py3_installed.stdout"
     changed_when: False
     tags:
       - python3
