@@ -12,11 +12,11 @@
 
     - name: Install development tools packages
       shell: yum install @development -y
-      when: ansible_os_family in ["RedHat,"CentOS"] and not dnf_result.stat.exists
+      when: ansible_os_family in ["RedHat", "CentOS"] and not dnf_result.stat.exists
 
     - name: Install development tools packages
       shell: dnf -y groupinstall "Development Tools"
-      when: ansible_os_family in ["RedHat,"CentOS"] and dnf_result.stat.exists
+      when: ansible_os_family in ["RedHat", "CentOS"] and dnf_result.stat.exists
 
     - name: Install development tools packages
       apt:
