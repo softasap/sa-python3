@@ -1,0 +1,16 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install development tools packages
+      yum: name={{ item }} state=present update_cache=yes
+      with_items:
+        - "@development-tools"
+      when: ansible_os_family in ["Redhat", "CentOS"]
+
+    - name: Install development tools packages
+      apt: name={{ item }} state=present update_cache=yes
+      with_items:
+        - "build-essential"
+      when: ansible_os_family in ["Debian"]
