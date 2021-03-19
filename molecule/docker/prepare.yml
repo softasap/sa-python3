@@ -2,14 +2,21 @@
 - name: Prepare
   hosts: all
   tasks:
+
+    - debug: msg="ansible_os_family={{ ansible_os_family }}"
+
     - name: Install development tools packages
-      yum: name={{ item }} state=present update_cache=yes
-      with_items:
-        - "@development-tools"
+      yum:
+        name:
+          - "@development-tools"
+        state=present
+        update_cache=yes
       when: ansible_os_family in ["Redhat", "CentOS"]
 
     - name: Install development tools packages
-      apt: name={{ item }} state=present update_cache=yes
-      with_items:
-        - "build-essential"
+      apt:
+        name:
+          - "build-essential"
+        state=present
+        update_cache=yes
       when: ansible_os_family in ["Debian"]
