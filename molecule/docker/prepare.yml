@@ -11,7 +11,7 @@
           - "@development-tools"
         state: present
         update_cache: yes
-      when: ansible_os_family in ["Redhat", "CentOS"]
+      when: ansible_os_family in ["RedHat", "CentOS"]
 
     - name: Install development tools packages
       apt:
