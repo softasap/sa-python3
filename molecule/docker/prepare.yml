@@ -6,11 +6,12 @@
     - debug: msg="ansible_os_family={{ ansible_os_family }}"
 
     - name: Install development tools packages
-      yum:
-        name:
-          - "@development"
-        state: present
-        update_cache: yes
+      shell: yum install @development -y
+#      yum:
+#        name:
+#          - "@development"
+#        state: present
+#        update_cache: yes
       when: ansible_os_family in ["RedHat", "CentOS"]
 
     - name: Install development tools packages
