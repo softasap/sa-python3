@@ -42,11 +42,10 @@
   roles:
 
       - {
-         role: "sa-python3"
+         role: "sa_python3"
         }
 
 
   tasks:
 
     - debug: msg="Tasks section"
-

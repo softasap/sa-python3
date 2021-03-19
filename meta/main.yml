@@ -3,6 +3,8 @@ galaxy_info:
   author: vyacheslav voronenko
   description: installs python3 from source using specific version
   company: http://www.voronenko.info/
+  role_name: sa_python3  # if absent directory name hosting role is used instead
+  namespace: softasap  # if absent, author is used instead
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
   # issue_tracker_url: http://example.com/issue/tracker

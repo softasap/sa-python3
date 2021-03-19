@@ -1,4 +1,4 @@
----
+--- #1.8.0
   - name: Python3 | Check is installed
     command: "python3 --version"
     register: py3_installed

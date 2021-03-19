@@ -1,4 +1,4 @@
-sa-python3
+sa_python3
 ==========
 
 [![Build Status](https://travis-ci.org/softasap/sa-python3.svg?branch=master)](https://travis-ci.org/softasap/sa-python3)
@@ -12,7 +12,7 @@ Simple
 ```YAML
   roles:
     - {
-        role: "sa-python3",
+        role: "sa_python3",
         python_version: "3.6.4"
       }
 ```
@@ -22,7 +22,7 @@ Advanced:
 ```YAML
   roles:
     - {
-        role: "sa-python",
+        role: "sa_python3",
         python_version: "3.6.4"
       }
 ```
