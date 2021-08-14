@@ -1,6 +1,7 @@
-sa-python3
+sa_python3
 ==========
 
+[![Build Status](https://github.com/softasap/sa-python3/workflows/CI/badge.svg?event=push)](https://github.com/softasap/sa-python3/actions?query=workflow%3ACI)
 [![Build Status](https://travis-ci.org/softasap/sa-python3.svg?branch=master)](https://travis-ci.org/softasap/sa-python3)
 
 installs python3 and updates pip3 to the specified {{ python_version }}
@@ -12,7 +13,7 @@ Simple
 ```YAML
   roles:
     - {
-        role: "sa-python3",
+        role: "sa_python3",
         python_version: "3.6.4"
       }
 ```
@@ -22,7 +23,7 @@ Advanced:
 ```YAML
   roles:
     - {
-        role: "sa-python",
+        role: "sa_python3",
         python_version: "3.6.4"
       }
 ```

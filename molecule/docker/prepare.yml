@@ -1,0 +1,27 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+
+    - debug: msg="ansible_os_family={{ ansible_os_family }}"
+
+    - name: Do we have dnf?
+      stat:
+        path: /usr/bin/dnf
+      register: dnf_result
+
+    - name: Install development tools packages
+      shell: yum install @development -y
+      when: ansible_os_family in ["RedHat", "CentOS"] and not dnf_result.stat.exists
+
+    - name: Install development tools packages
+      shell: dnf -y groupinstall "Development Tools"
+      when: ansible_os_family in ["RedHat", "CentOS"] and dnf_result.stat.exists
+
+    - name: Install development tools packages
+      apt:
+        name:
+          - "build-essential"
+        state: present
+        update_cache: yes
+      when: ansible_os_family in ["Debian"]
